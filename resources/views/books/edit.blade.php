@@ -38,7 +38,7 @@
 			    {!! Form::label('translation', $translation->name, ['for' => $translation->name]) !!}
 		  </div>
 		  @endforeach
-		  {!! Form::submit('Edit Book', ['class' => 'btn btn-primary', 'name' => 'submit']) !!}
+		  {!! Form::submit('Update Book', ['class' => 'btn btn-primary', 'name' => 'submit']) !!}
 		{!! Form::close() !!}		
 	</div>
 </div>

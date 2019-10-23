@@ -19,7 +19,7 @@ class BookController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('auth');
     }
 
     /**
@@ -30,6 +30,7 @@ class BookController extends Controller
     public function index()
     {
         //
+        //$authors = $this->authorsFullName();
         $books = Book::sortable()->orderBy('publication_date', 'desc')->paginate(10);
 
         return view('books.index')->with('books', $books);
@@ -75,7 +76,6 @@ class BookController extends Controller
         if ($validator == true)
         {
             Session::flash('created_book', 'The book has been created');
-
             return redirect('/books');
         }
     }
@@ -104,9 +104,10 @@ class BookController extends Controller
         $authors = $this->authorsFullName();
         $translations = $this->getApi();
         $checked_translations = $book->select('translations')->get();
-        dd($checked_translations);
+        $array = [];
+        $array = explode(',', trim($book->translations));
 
-        return view('books.edit')->with('book', $book)->with('translations', $translations)->with('authors', $authors)->with('checked_translations', $checked_translations);
+        return view('books.edit')->with('book', $book)->with('translations', $translations)->with('authors', $authors)->with('checked_translations', array_map('trim', $array));
     }
 
     /**

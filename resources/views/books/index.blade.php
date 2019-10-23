@@ -22,19 +22,17 @@
                       <thead class="thead-light">
                         <tr>
                           <th scope="col">@sortablelink('title', 'Book Title')</th>
-                          <th scope="col">@sortablelink('author_id', 'Authors First Name')</th>
-                          <th scope="col">@sortablelink('author_id', 'Authors Last Name')</th>
+                          <th scope="col">@sortablelink('author_id', 'Authors Full Name')</th>
                           <th scope="col">Publication Date</th>
                           <th scope="col">@sortablelink('translations', 'Translations')</th>
-                          <th scope="col">Action</th>
+                          <th scope="col"></th>
                         </tr>
                       </thead>
                       <tbody>
                         @foreach($books as $book)
                         <tr>
                           <td>{{ $book->title }}</td>
-                          <td>{{ $book->author->first_name }}</td>
-                          <td>{{ $book->author->last_name }}</td>
+                          <td>{{ $book->author->first_name .' '. $book->author->last_name}}</td>
                           <td>{{ $book->publication_date }}</td>
                           <td>{{ $book->translations }}</td>
                           <td><a href="{{ route('books.edit', $book->id) }}" class="btn btn-secondary btn-sm float-none">Update Book</a></td>

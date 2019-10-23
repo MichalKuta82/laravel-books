@@ -24,7 +24,7 @@
                           <th scope="col">First Name</th>
                           <th scope="col">Last Name</th>
                           <th scope="col">Country</th>
-                          <th scope="col">Action</th>
+                          <th scope="col"></th>
                         </tr>
                       </thead>
                       <tbody>
