@@ -105,9 +105,8 @@ class BookController extends Controller
         $translations = $this->getApi();
         $checked_translations = $book->select('translations')->get();
         $array = [];
-        $array = explode(',', trim($book->translations));
 
-        return view('books.edit')->with('book', $book)->with('translations', $translations)->with('authors', $authors)->with('checked_translations', array_map('trim', $array));
+        return view('books.edit')->with('book', $book)->with('translations', $translations)->with('authors', $authors)->with('checked_translations', array_map('trim', (explode(',', $book->translations))));
     }
 
     /**
