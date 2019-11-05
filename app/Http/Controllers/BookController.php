@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use GuzzleHttp\Client as GuzzleClient;
 use Illuminate\Support\Facades\Auth;
 use App\Book;
 use App\Author;
+use App\Traits\ApiTrait;
 use DB;
 
 class BookController extends Controller
 {
+    use ApiTrait;
      /**
      * Create a new controller instance.
      *
@@ -104,7 +105,6 @@ class BookController extends Controller
         $authors = $this->authorsFullName();
         $translations = $this->getApi();
         $checked_translations = $book->select('translations')->get();
-        //$array = [];
 
         return view('books.edit')->with('book', $book)->with('translations', $translations)->with('authors', $authors)->with('checked_translations', array_map('trim', (explode(',', $book->translations))));
     }
@@ -151,14 +151,6 @@ class BookController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function getApi()
-    {
-        $client = new GuzzleClient();
-        $response = $client->get('https://restcountries.eu/rest/v2/all');
-
-        return json_decode($response->getBody());
     }
 
     public function authorsFullName()

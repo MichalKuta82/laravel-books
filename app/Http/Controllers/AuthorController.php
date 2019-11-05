@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use GuzzleHttp\Client as GuzzleClient;
+use App\Traits\ApiTrait;
 use App\Author;
 
 class AuthorController extends Controller
 {
+    use ApiTrait;
     /**
      * Create a new controller instance.
      *
@@ -143,10 +144,4 @@ class AuthorController extends Controller
         //
     }
 
-    public function getApi()
-    {
-        $client = new GuzzleClient();
-        $response = $client->get('https://restcountries.eu/rest/v2/all');
-        return $countries = json_decode($response->getBody());
-    }
 }
